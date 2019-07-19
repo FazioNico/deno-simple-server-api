@@ -15,7 +15,7 @@ export const router = async (req: ServerRequest): Promise<void> => {
       const url = `https://reqres.in/api/${params.join('')}`;
       console.log('Request to: ', url);
       // do request to https://reqres.in with correct params
-      data = await await fetch(url, {}).then(res => ({...res})).catch(err => err)
+      data = await fetch(url, {}).then(res => ({...res})).catch(err => err)
       break;
     default:
       break;
