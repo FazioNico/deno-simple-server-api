@@ -1,15 +1,18 @@
-// import deps
-import { serve } from 'https://deno.land/std/http/server.ts';
+// import deps module with url
+import { serve, ServerRequest } from 'https://deno.land/std/http/server.ts';
+// import router file
 import { router } from './router.ts';
 
-// create basic server
-const s = serve("0.0.0.0:8000");
 // create async function to run server with router
-async function main() {
+const main = async ({host, port}: {host: string, port: string}) => {
+  // create basic server
+  const s = serve(`${host}:${port}`);
   for await (const req of s) {
-    router(req);
+    await router((req as ServerRequest)).catch(err => {
+      console.log('Error: ', err);
+    });
   }
 }
 // run main() function
-main();
+main({host: '0.0.0.0', port: '8000'});
 
